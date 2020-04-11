@@ -1,4 +1,10 @@
 <?php
+
+//initialize the session object
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 define('DB_SERVER', 'localhost');

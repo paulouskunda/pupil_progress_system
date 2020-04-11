@@ -1,3 +1,12 @@
+<?php
+    // Include config file
+    require_once "../includes/config.php";
+                    
+    //Get the grade being viewed
+
+    $gradeView = $_GET['grade'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,15 +27,29 @@
         .page-header h2{
             margin-top: 0;
         }
-        table tr td:last-child a{
+        table tr td:last-child a{   
             margin-right: 15px;
         } */
     </style>
     <script type="text/javascript">
-        $(document).ready(function(){
-            // $('[data-toggle="tooltip"]').tooltip();,
-            $('#myTable').DataTable();
-        });
+        $(document).ready(function() {
+            var table = $('#myTable').DataTable();
+        
+            $('#myTable tbody').on( 'click', 'tr', function () {
+                $(this).toggleClass('selected');
+            } );
+        
+            $('#button').click( function () {
+                var div = document.getElementById("dom-target");
+                var myData = div.textContent;
+                for (var i = 0; i < table.rows('.selected').data().length; i++) {
+                    console.log(table.rows('.selected').data()[i][0] + myData +' \n');
+                }
+               
+            });
+        } );
+
+
     </script>
 </head>
 <body>
@@ -38,12 +61,21 @@
                         <h2 class="pull-left">Pupil Details</h2>
                         <!-- <a href="create.php" class="btn btn-success pull-right">Add New Employee</a> -->
                     </div>
+
+                    <!-- Pass the php variable to dom-target, this is a simple way to convert php to javascript variables -->
+                    <div id="dom-target" style="display: none;">
+                         <?php echo $gradeView; ?>
+                    </div>
+                    <!-- // button to get all seletected pass them to an array -->
+                    <button id="button">Change Grade for Selected</button><br>
                     <?php
-                    // Include config file
-                    require_once "../includes/config.php";
-                    
+                
+                    //Update Selected
+
+                 
+
                     // Attempt select query execution
-                    $sql = "SELECT * FROM pupil ";
+                    $sql = "SELECT * FROM pupil WHERE grade = '$gradeView'";
                     if($result = $mysqli->query($sql)){
                         if($result->num_rows > 0){
                             echo "<table id='myTable'  class='table table-bordered table-striped'>";

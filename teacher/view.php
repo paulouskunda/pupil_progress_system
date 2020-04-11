@@ -24,20 +24,20 @@
 <ul class="list-group list-group-flush">
 
 <li class="list-group-item">
-    <a href="move.php" class="card-link">Grade 1 &nbsp; &nbsp; &nbsp; &raquo;</a> &nbsp; &nbsp; 
-    <a href="move.php" class="card-link">Grade 2 &nbsp; &nbsp; &nbsp; &raquo;</a>
+    <a href="move.php?grade=1" class="card-link">Grade 1 &nbsp; &nbsp; &nbsp; &raquo;</a> &nbsp; &nbsp; 
+    <a href="move.php?grade=2" class="card-link">Grade 2 &nbsp; &nbsp; &nbsp; &raquo;</a>
     </li>
 
 <li class="list-group-item">
-<a href="move.php" class="card-link">Grade 3 &nbsp; &nbsp; &nbsp; &raquo;</a> &nbsp; &nbsp;
-<a href="move.php" class="card-link">Grade 4 &nbsp; &nbsp; &nbsp; &raquo;</a>
+<a href="move.php?grade=3" class="card-link">Grade 3 &nbsp; &nbsp; &nbsp; &raquo;</a> &nbsp; &nbsp;
+<a href="move.php?grade=4" class="card-link">Grade 4 &nbsp; &nbsp; &nbsp; &raquo;</a>
 </li>
 <li class="list-group-item">
-<a href="move.php" class="card-link">Grade 5 &nbsp; &nbsp; &nbsp; &raquo;</a> &nbsp; &nbsp;
-<a href="move.php" class="card-link">Grade 6 &nbsp; &nbsp; &nbsp; &raquo;</a>
+<a href="move.php?grade=5" class="card-link">Grade 5 &nbsp; &nbsp; &nbsp; &raquo;</a> &nbsp; &nbsp;
+<a href="move.php?grade=6" class="card-link">Grade 6 &nbsp; &nbsp; &nbsp; &raquo;</a>
 </li>
 <li class="list-group-item">
-<a href="move.php" class="card-link">Grade 7 &nbsp; &nbsp; &nbsp; &raquo;</a>
+<a href="move.php?grade=7" class="card-link">Grade 7 &nbsp; &nbsp; &nbsp; &raquo;</a>
 </li>
    
   </ul>

@@ -36,7 +36,7 @@
 
 <div class="card-footer">
 <!-- <small class="text-muted">Here is a footer</small> -->
-<a href="#" class="card-link">Add Teacher                                &raquo;</a>
+<a href="addTeacher.php" class="card-link">Add Teacher  &raquo;</a>
 </div>
 </div>
 
