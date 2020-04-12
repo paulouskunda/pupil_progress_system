@@ -42,10 +42,35 @@
             $('#button').click( function () {
                 var div = document.getElementById("dom-target");
                 var myData = div.textContent;
+                var jsonArrayData = new Array();
                 for (var i = 0; i < table.rows('.selected').data().length; i++) {
-                    console.log(table.rows('.selected').data()[i][0] + myData +' \n');
+                    console.log(table.rows('.selected').data()[i][0] + ' '+ myData +' \n');
+
+                    //create a json file
+                    jsonArrayData.push({
+                        id: table.rows('.selected').data()[i][0],
+                        grade: myData
+                    });
+
                 }
-               
+                console.log(jsonArrayData);
+                //push the json data to the logic.php file [bottom line callbacks lol]
+                $.ajax({
+                       type: 'post',
+                       url: '../logic/upgrade.php',
+                       dataType: 'JSON',
+                       data: {
+                           source1: JSON.stringify(jsonArrayData)
+                       },
+                       success: function(data){
+                        alert("Well I did my posting");
+                           console.log("success: ",data);
+                       },
+                       failure: function(errMsg) {
+                            console.error("error:",errMsg);
+                       }
+                });
+                             
             });
         } );
 
@@ -63,9 +88,7 @@
                     </div>
 
                     <!-- Pass the php variable to dom-target, this is a simple way to convert php to javascript variables -->
-                    <div id="dom-target" style="display: none;">
-                         <?php echo $gradeView; ?>
-                    </div>
+                    <div id="dom-target" style="display: none;"><?php echo $gradeView; ?></div>
                     <!-- // button to get all seletected pass them to an array -->
                     <button id="button">Change Grade for Selected</button><br>
                     <?php
