@@ -9,6 +9,7 @@
         $pupilName = '';
         $parentName = '';
         $parentPhoneNumber = '';
+        $grade = '';
 
         $SQL = "SELECT * FROM pupil, parent WHERE pupil.pupilID = '$pupilID' AND pupil.parentID = parent.parentID";
         $results = mysqli_query($mysqli, $SQL);
@@ -18,6 +19,7 @@
                 $pupilName = $rows['pupilName'];
                 $parentName = $rows['parentName'];
                 $parentPhoneNumber = $rows['phoneNumber'];
+                $grade = $rows['grade'];
             }
         }
 
@@ -28,6 +30,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Active Status Modification </title>
 <!-- Meta Tags for Bootstrap 4 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,7 +38,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 850px; padding: 20px; margin-left: 20%; margin-top:10% }
+        .wrapper{ width: 850px; padding: 10px; margin-left: 20%; margin-top:1% }
 </style>
 </head>
 <body>
@@ -51,6 +54,11 @@
 			<div class="col-sm-6">
                 <label>Pupil Name</label>
 				<input type="text" name="fullName" readonly value="<?php echo $pupilName; ?>" placeholder="Pupil" class="form-control">
+
+			</div><br>
+            <div class="col-sm-6">
+                <label>Grade</label>
+				<input type="text" readonly value="<?php echo $grade; ?>" placeholder="Grade" class="form-control">
 
 			</div><br>
 			<div class="col-sm-6">
