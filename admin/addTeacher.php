@@ -61,6 +61,10 @@ if(isset($_POST['submit'])){
     </style>
 </head>
 <body>
+<?php 
+        require_once '../includes/navbar_header.php';
+        ?>
+		
     <div class="container">
     <div class="wrapper">
         <h2>Add A Teacher</h2>

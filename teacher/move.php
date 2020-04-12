@@ -86,6 +86,10 @@
     </script>
 </head>
 <body>
+        <?php 
+        require_once '../includes/navbar_header.php';
+        ?>
+        
         <?php
             //show a session and refresh the screen
             if(isset($_SESSION['upgradeMessage'])){
