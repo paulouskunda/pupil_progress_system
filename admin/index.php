@@ -1,13 +1,33 @@
+<?php
+// Initialize the session
+session_start();
+ 
+//Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ../index.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Meta Tags for Bootstrap 4 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap 4 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Bootstrap 4 CSS
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
 </head>
 <body>
+
+<?php
+require_once '../includes/navbar_header.php';
+
+?>
+
+
 
 <div class ="container" style="margin-top: 5%;">
 
@@ -36,7 +56,11 @@
 
 <div class="card-footer">
 <!-- <small class="text-muted">Here is a footer</small> -->
+<<<<<<< HEAD
 <a href="addTeacher.php" class="card-link">Add Teacher  &raquo;</a>
+=======
+<a href="addTeacher.php" class="card-link">Add Teacher                                &raquo;</a>
+>>>>>>> third commit
 </div>
 </div>
 
