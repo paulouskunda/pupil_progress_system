@@ -43,7 +43,7 @@ require_once '../includes/navbar_header.php';
 </div>
 
 <div class="card-footer">
-<a href="reports.php" class="card-link">Check Reports                   &raquo;</a>
+<a href="reports.php" class="card-link">Check Reports &nbsp; &nbsp; &raquo;</a>
 <!-- <small class="text-muted">Here is a footer</small> -->
 </div>
 </div>
@@ -56,11 +56,8 @@ require_once '../includes/navbar_header.php';
 
 <div class="card-footer">
 <!-- <small class="text-muted">Here is a footer</small> -->
-<<<<<<< HEAD
-<a href="addTeacher.php" class="card-link">Add Teacher  &raquo;</a>
-=======
-<a href="addTeacher.php" class="card-link">Add Teacher                                &raquo;</a>
->>>>>>> third commit
+<a href="addTeacher.php" class="card-link">Add Teacher &nbsp; &nbsp; &raquo;</a>
+
 </div>
 </div>
 
