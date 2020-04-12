@@ -3,6 +3,11 @@ error_reporting(E_ALL);
 
 // Include config file
 require_once "../includes/config.php";
+//Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ../index.php");
+    exit;
+}
 
 if(isset($_POST['submit'])){
 
