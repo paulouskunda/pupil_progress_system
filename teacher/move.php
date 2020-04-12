@@ -106,6 +106,7 @@
                     <!-- Pass the php variable to dom-target, this is a simple way to convert php to javascript variables -->
                     <div id="dom-target" style="display: none;"><?php echo $gradeView; ?></div>
                     <!-- // button to get all seletected pass them to an array -->
+                    <p>You can select the pupils to upgrade to the next class by clicking on them and then press the button below.</p>
                     <button id="button">Change Grade for Selected</button><br>
                     <?php
                 
@@ -136,7 +137,7 @@
                                         echo "<td>" . $row['grade'] . "</td>";
                                         echo "<td>" . $row['yearStarted'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='read.php?id=". $row['pupilID'] ."' title='Move pupil' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                                            echo "<a href='activeStatus.php?id=". $row['pupilID'] ."' title='Move pupil' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                                             // echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                                             // echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                                         echo "</td>";

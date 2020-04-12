@@ -18,7 +18,15 @@ if(isset($_POST['submit'])){
     $address = mysqli_real_escape_string($mysqli, $_POST['address']);    
     $phoneNumber = mysqli_real_escape_string($mysqli, $_POST['phoneNumber']);
     $timestamp = date("Y-m-d H:i:s"); 
-    $defaultPassword = '12345';
+
+    //pupil data
+    $firstPName = mysqli_real_escape_string($mysqli, $_POST['firstPName']);
+	$lastPName = mysqli_real_escape_string($mysqli, $_POST['lastPName']);
+    $otherPName = mysqli_real_escape_string($mysqli, $_POST['otherPName']);
+    $dob = mysqli_real_escape_string($mysqli, $_POST['dob']);
+    $grade = mysqli_real_escape_string($mysqli, $_POST['grade']);
+    $yearEnrolled = mysqli_real_escape_string($mysqli, $_POST['year']);
+
 
     
     $fullName = '';
@@ -31,16 +39,43 @@ if(isset($_POST['submit'])){
 		$fullName = $firstName." ".$lastName;
     }
 
+    $fullPName = '';
+
+	//check if other name is provided
+	if ($otherPName != null || $otherPName != '') {
+		# code...
+		$fullPName = $firstPName." ".$otherPName." ".$lastPName;
+	} else {
+		$fullPName = $firstPName." ".$lastPName;
+    }
+
 
 
     //SQL command
-    $sql = "INSERT INTO teacher(`teacherName`, `phoneNumber`, `address`, `password`, `dateCreated`) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO parent(`parentName`, `phoneNumber`, `address`, `dateCreated`) VALUES (?, ?, ?, ?)";
 
     if($stmt = $mysqli->prepare($sql)){
-        $stmt->bind_param("sssss", $fullName, $phoneNumber, $address, $defaultPassword, $timestamp);
+        $stmt->bind_param("ssss", $fullName, $phoneNumber, $address, $timestamp);
 
         if($stmt->execute()){
-            $_SESSION['message'] = "Teacher ".$fullName." added successfully";
+            $lastID = $stmt->insert_id;
+            //add the pupil details
+
+            $pupilSQL = "INSERT INTO pupil(`pupilName`, `parentID`, `dateOfBirth`, `grade`, `yearstarted`) VALUES (?, ?, ?, ?, ?)";
+            if($stmts = $mysqli->prepare($pupilSQL) ){
+                $stmts->bind_param("sisis", $fullPName, $lastID, $dob, $grade, $yearEnrolled);
+
+                if($stmts->execute()){
+                    $_SESSION['message'] = "Pupil ".$fullPName." was successfully enrolled";
+
+                } else {
+                    echo "Error ". $stmt->error;
+                }
+            }else {
+                echo "Error ". $stmt->error;
+            }
+
+
         }else {
             echo "Error ". $stmt->error;
         }
@@ -68,27 +103,38 @@ if(isset($_POST['submit'])){
 <body>
     <div class="container">
     <div class="wrapper">
+        <?php
+             if(isset($_SESSION['message'])){
+                echo '<p class="alert alert-success a-flex flex-row">'.$_SESSION['message'].'</p>';
+                unset($_SESSION['message']);
+             
+            }s
+        ?>
         <h2>Add A Pupil</h2>
 
 
        
         <form class="form-group" action="" method="POST">
-            <h4> Parents/Guardians Sections </h4>
+            <h3> Parents/Guardians Section </h3>
 
 			<div class="col-sm-6">
+				<label>First Name</label>
 				<input type="text" name="firstName" placeholder="First-Name" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
+				<label>Last Name</label>
 				<input type="text" name="lastName" placeholder="Last-Name" class="form-control">
 
 			</div> 
 			<br><br><br>
 			<div class="col-sm-6">
+				<label>Other Name</label>
 				<input type="text" name="otherName" placeholder="Other-Name [Middle Name]" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
+				<label>Phone Number</label>
 				<input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control">
 
 			</div>
@@ -98,35 +144,55 @@ if(isset($_POST['submit'])){
 
 			</div> -->
 			<div class="col-sm-6">
+				<label>Physical Address</label>
 				<input type="text" name="address" placeholder="Address" class="form-control">
 
 			</div>
-			<br><br><br>
-            <h3>Pupils Sections</h3>
+			<br><br><br><br>
+            <h3 align="left">Pupils Sections</h3>
             <div class="col-sm-6">
-				<input type="text" name="firstName" placeholder="First-Name" class="form-control">
+            	<label>First Name</label>
+				<input type="text" name="firstPName" placeholder="First-Name" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
-				<input type="text" name="lastName" placeholder="Last-Name" class="form-control">
+				<label>Last Name</label>
+				<input type="text" name="lastPName" placeholder="Last-Name" class="form-control">
 
 			</div> 
 			<br><br><br>
 			<div class="col-sm-6">
-				<input type="text" name="otherName" placeholder="Other-Name [Middle Name]" class="form-control">
+				<label>Other Name</label>
+
+				<input type="text" name="otherPName" placeholder="Other-Name [Middle Name]" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
-				<input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control">
+				<label>Date of Birth</label>
+				<input type="date" name="dob" placeholder="Date of birth" class="form-control">
 
+			</div>	<br><br><br>
+             <div class="col-sm-6">
+				<label>Select Grade</label>
+
+                <select name="grade" class="form-control">
+                <option id="1">1</option>
+                <option id="2">2</option>
+                <option id="3">3</option>
+                <option id="4">4</option>
+                <option id="5">5</option>
+                <option id="6">6</option>
+                <option id="7">7</option>
+                </select>
 			</div>
-			<br><br><br>
+		
 			<!-- <div class="col-sm-6">
 				<input type="text" name="nrc" placeholder="Nrc Number" class="form-control">
 
 			</div> -->
 			<div class="col-sm-6">
-				<input type="text" name="address" placeholder="Address" class="form-control">
+				<label>Year enrolled</label>
+				<input type="date" name="year" placeholder="Year enrolled" class="form-control">
 
 			</div>
 			<br><br><br>
