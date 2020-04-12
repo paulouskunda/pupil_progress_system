@@ -43,7 +43,7 @@ require_once '../includes/navbar_header.php';
 </div>
 
 <div class="card-footer">
-<a href="reports.php" class="card-link">Check Reports                   &raquo;</a>
+<a href="reports.php" class="card-link">Check Reports &nbsp; &nbsp; &raquo;</a>
 <!-- <small class="text-muted">Here is a footer</small> -->
 </div>
 </div>
@@ -54,11 +54,19 @@ require_once '../includes/navbar_header.php';
     <p class="card-text">Here is a shorter description of the card.</p>
     </div>
 
+<<<<<<< HEAD
     <div class="card-footer">
     <!-- <small class="text-muted">Here is a footer</small> -->
     <a href="addTeacher.php" class="card-link">Add Teacher  &raquo;</a>
 
     </div>
+=======
+<div class="card-footer">
+<!-- <small class="text-muted">Here is a footer</small> -->
+<a href="addTeacher.php" class="card-link">Add Teacher &nbsp; &nbsp; &raquo;</a>
+
+</div>
+>>>>>>> caa90e4c6563a7e89f68a591fa1641d7aa68cc84
 </div>
 
 <div class="card">
