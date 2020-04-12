@@ -48,31 +48,33 @@ require_once '../includes/navbar_header.php';
 </div>
 </div>
 <div class="card">
-<img class="card-img-top" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="Card image cap">
-<div class="card-body">
-<h4 class="card-title">Teacher</h4>
-<p class="card-text">Here is a shorter description of the card.</p>
+    <img class="card-img-top" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="Card image cap">
+    <div class="card-body">
+    <h4 class="card-title">Teacher</h4>
+    <p class="card-text">Here is a shorter description of the card.</p>
+    </div>
+
+    <div class="card-footer">
+    <!-- <small class="text-muted">Here is a footer</small> -->
+    <a href="addTeacher.php" class="card-link">Add Teacher  &raquo;</a>
+
+    </div>
 </div>
 
-<div class="card-footer">
-<!-- <small class="text-muted">Here is a footer</small> -->
-<<<<<<< HEAD
-<a href="addTeacher.php" class="card-link">Add Teacher  &raquo;</a>
-=======
-<a href="addTeacher.php" class="card-link">Add Teacher                                &raquo;</a>
->>>>>>> third commit
-</div>
+<div class="card">
+    <img class="card-img-top" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="Card image cap">
+    <div class="card-body">
+    <h4 class="card-title">Pupil</h4>
+    <p class="card-text">Add Pupil</p>
+    </div>
+
+    <div class="card-footer">
+    <!-- <small class="text-muted">Here is a footer</small> -->
+    <a href="addPupil.php" class="card-link">Add Pupil  &raquo;</a>
+
+    </div>
 </div>
 
-<!-- <div class="card">
-<img class="card-img-top" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="Card image cap">
-<div class="card-body">
-<h4 class="card-title">Card Title</h4>
-<p class="card-text">Here is a very long description of the card and the height will be auto aligned with flex box. You can enter longer text to check the cards are aligned perfectly with same height without any gap.</p>
-</div>
-<div class="card-footer">
-<a href="#" class="card-link">Card link</a>
-<small class="text-muted">Here is a footer</small> -->
 </div>
 </div> 
 

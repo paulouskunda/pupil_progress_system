@@ -10,7 +10,16 @@
         $parentName = '';
         $parentPhoneNumber = '';
 
-        $SQL = "SELECT * FROM pupil, parent WHERE pupil.pupilID = '$pupilID' AND "
+        $SQL = "SELECT * FROM pupil, parent WHERE pupil.pupilID = '$pupilID' AND pupil.parentID = parent.parentID";
+        $results = mysqli_query($mysqli, $SQL);
+
+        if(mysqli_num_rows($results) > 0){
+            while($rows = mysqli_fetch_assoc($results)){
+                $pupilName = $rows['pupilName'];
+                $parentName = $rows['parentName'];
+                $parentPhoneNumber = $rows['phoneNumber'];
+            }
+        }
 
     }
 
@@ -41,12 +50,12 @@
 
 			<div class="col-sm-6">
                 <label>Pupil Name</label>
-				<input type="text" name="fullName" placeholder="Pupil" class="form-control">
+				<input type="text" name="fullName" readonly value="<?php echo $pupilName; ?>" placeholder="Pupil" class="form-control">
 
 			</div><br>
 			<div class="col-sm-6">
                <label>Parent Name</label>
-				<input type="text" name="parentName" placeholder="Parent Name" class="form-control">
+				<input type="text" name="parentName" readonly value="<?php echo $parentName; ?>" placeholder="Parent Name" class="form-control">
 
 			</div> 
 			<br>
@@ -54,7 +63,7 @@
 			<div class="col-sm-6">
             <label>Parent Contact Number</label>
 
-				<input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control">
+				<input type="text" name="phoneNumber" readonly value="<?php echo $parentPhoneNumber; ?>" placeholder="Phone Number" class="form-control">
 
 			</div>
 
@@ -87,6 +96,11 @@
          
             <div class="col-sm-6">
                 <textarea placeholder="Reason  in details" class="form-control"></textarea>
+            </div>
+
+            <br>
+            <div class="col-sm-6">
+            <input class="btn btn-primary" type="submit" name="submit" value="submit" />
             </div>
         </form>
     </div>

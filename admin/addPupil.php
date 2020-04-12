@@ -101,8 +101,13 @@ if(isset($_POST['submit'])){
     </style>
 </head>
 <body>
+<?php
+// require_once '../includes/navbar_header.php';
+
+?>
     <div class="container">
     <div class="wrapper">
+
         <?php
              if(isset($_SESSION['message'])){
                 echo '<p class="alert alert-success a-flex flex-row">'.$_SESSION['message'].'</p>';
@@ -176,13 +181,13 @@ if(isset($_POST['submit'])){
 				<label>Select Grade</label>
 
                 <select name="grade" class="form-control">
-                <option id="1">1</option>
-                <option id="2">2</option>
-                <option id="3">3</option>
-                <option id="4">4</option>
-                <option id="5">5</option>
-                <option id="6">6</option>
-                <option id="7">7</option>
+                    <option id="1">1</option>
+                    <option id="2">2</option>
+                    <option id="3">3</option>
+                    <option id="4">4</option>
+                    <option id="5">5</option>
+                    <option id="6">6</option>
+                    <option id="7">7</option>
                 </select>
 			</div>
 		

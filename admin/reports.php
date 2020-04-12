@@ -50,6 +50,54 @@ require_once '../includes/navbar_header.php';
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+               
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Report Types</strong>
+                    </div>
+                    <div class="card-body">
+
+                    <form action="generate.php" method="POST"> 
+                        <div class="col-sm-12">
+                            <label>Report Types</label>
+                            <select class="form-control" name="reportType" onChange="reportSelect(this)">
+                                <option id="allPupils" value="allPupils"> All Pupils</option>
+                                <option id="inGrade" value="inGrade"> All Pupils in Grade </option>
+                                <option id="yearAndGrade" value="yearAndGrade"> All Pupils in </option>
+                                <option id="complex" value="complex"> All Pupils that are </option>
+                                
+                            </select>
+                        </div>
+
+                        <div class="col-sm-12" id="hidden_grade" style="display: none;">
+                        <label>Grade </label>
+                        <select class="form-control" name="grade" >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                                
+                        </select>
+                    </div> 
+
+                    <div class="col-sm-12" id="hidden_year" style="display: none;">
+                        <label>Year Between</label><br>
+                        <label class="control-label mb-1">From </label>
+                        <input type="text" name="startYear" id="date" class="form-control" required="true">
+                        <label class="control-label mb-1">To</label>
+                        <input type="text" name="endYear" class="form-control" required>
+                    </div>
+
+                        <input type="submit" value="submit"/>
+                    </form>
+
+
+                    </div>
+                </div>
+              
                     <div class="page-header clearfix">
                         <h2 class="pull-left">Pupil Details</h2>
                         <!-- <a href="create.php" class="btn btn-success pull-right">Add New Employee</a> -->
@@ -106,5 +154,32 @@ require_once '../includes/navbar_header.php';
             </div>        
         </div>
     </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function reportSelect(select) {
+            if(select.value == 'inGrade' || select.value == 'All Pupils in Grade'){
+                document.getElementById('hidden_grade').style.display = "block";
+                document.getElementById('hidden_year').style.display = "none";
+                document.getElementById('hidden_reason').style.display = "none";
+                
+            }else if(select.value == 'yearAndGrade' || select.value == 'All Pupils in'){
+                document.getElementById('hidden_grade').style.display = "block";
+                document.getElementById('hidden_year').style.display = "block";
+                document.getElementById('hidden_reason').style.display = "none";
+
+            }else if(select.value == 'complex' || select.value == 'All Pupils that are'){
+                document.getElementById('hidden_grade').style.display = "none";
+                document.getElementById('hidden_year').style.display = "none";
+                document.getElementById('hidden_reason').style.display = "block";
+
+            }else {
+                document.getElementById('hidden_grade').style.display = "none";
+                document.getElementById('hidden_year').style.display = "none";
+                document.getElementById('hidden_reason').style.display = "none";
+            }
+        }
+    </script>
+
 </body>
 </html
