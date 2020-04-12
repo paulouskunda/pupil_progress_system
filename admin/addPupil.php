@@ -107,8 +107,8 @@ if(isset($_POST['submit'])){
              if(isset($_SESSION['message'])){
                 echo '<p class="alert alert-success a-flex flex-row">'.$_SESSION['message'].'</p>';
                 unset($_SESSION['message']);
-             
-            }s
+                // header('Refresh: 1; URL=move.php?grade='.$gradeView);
+            }
         ?>
         <h2>Add A Pupil</h2>
 
