@@ -70,6 +70,9 @@
                             console.error("error:",errMsg);
                        }
                 });
+
+                location.reload();
+                return false;
                              
             });
         } );
@@ -78,6 +81,14 @@
     </script>
 </head>
 <body>
+        <?php
+            //show a session and refresh the screen
+            if(isset($_SESSION['upgradeMessage'])){
+                echo '<p class="alert alert-success a-flex flex-row">'.$_SESSION['upgradeMessage'].'</p>';
+                unset($_SESSION['upgradeMessage']);
+                header('Refresh: 1; URL=move.php?grade='.$gradeView);
+            }
+        ?>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -93,7 +104,6 @@
                     <button id="button">Change Grade for Selected</button><br>
                     <?php
                 
-                    //Update Selected
 
                  
 
