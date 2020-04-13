@@ -1,7 +1,6 @@
 <?php
- // Initialize the session
-session_start();
-
+  // Include config file
+  require_once "../includes/config.php";
 //Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../index.php");
@@ -21,6 +20,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     
     <style type="text/css">
         /* .wrapper{
@@ -65,7 +69,11 @@ require_once '../includes/navbar_header.php';
                                 <option id="inGrade" value="inGrade"> All Pupils in Grade </option>
                                 <option id="yearAndGrade" value="yearAndGrade"> All Pupils in </option>
                                 <option id="complex" value="complex"> All Pupils that are </option>
+<<<<<<< HEAD
                                 <option id="endofyear" value="endofyear"> End of Year Report</option>
+=======
+                                <option id="singlePupil" value="singlePupil">Single Pupil Tracking</option>
+>>>>>>> Report
                                 
                             </select>
                         </div>
@@ -122,8 +130,32 @@ require_once '../includes/navbar_header.php';
                             <option value="notProgress">No Progress</option>
                             <option value="transfer">Transfer</option>                               
                         </select>
-                    </div>    
+                    </div>  
 
+                    <div class="col-sm-12" id="hidden_individual" style="display: none;">
+                      <!--Add php to get all Students from the database  -->
+                      <?php
+
+                        $SQLi = "SELECT * FROM pupil";
+
+                        if($results = $mysqli->query($SQLi)){
+                            if($results->num_rows > 0){
+                                echo '<label>Select Pupil</label>
+                                        <select class="form-control select2" style="width: 100%">';
+                                
+                                while($row = $results->fetch_array()){
+                                   echo '   <option>Select</option> 
+                                            <option value="'.$row['pupilID'].','.$row['pupilName'].','.$row['grade'].'"> ID: '
+                                            .$row['pupilID'].' Name: '.$row['pupilName'].' Grade: '.$row['grade'].
+                                            '</option> 
+                                           ';
+                                }
+                                echo '</select>';
+                        }
+                    }
+
+                      ?>
+                    </div><br>
                         <input type="submit" value="submit"/>
                     </form>
 
@@ -136,9 +168,7 @@ require_once '../includes/navbar_header.php';
                         <!-- <a href="create.php" class="btn btn-success pull-right">Add New Employee</a> -->
                     </div>
                     <?php
-                    // Include config file
-                    require_once "../includes/config.php";
-                    
+                   
                     // Attempt select query execution
                     $sql = "SELECT * FROM pupil ";
                     if($result = $mysqli->query($sql)){
@@ -195,24 +225,40 @@ require_once '../includes/navbar_header.php';
                 document.getElementById('hidden_grade').style.display = "block";
                 document.getElementById('hidden_year').style.display = "none";
                 document.getElementById('hidden_reason').style.display = "none";
+                document.getElementById('hidden_individual').style.display = "none";
+
                 
             }else if(select.value == 'yearAndGrade' || select.value == 'All Pupils in'){
                 document.getElementById('hidden_grade').style.display = "block";
                 document.getElementById('hidden_year').style.display = "block";
                 document.getElementById('hidden_reason').style.display = "none";
+                document.getElementById('hidden_individual').style.display = "none";
+
 
             }else if(select.value == 'complex' || select.value == 'All Pupils that are'){
                 document.getElementById('hidden_grade').style.display = "none";
                 document.getElementById('hidden_year').style.display = "none";
                 document.getElementById('hidden_reason').style.display = "block";
+                document.getElementById('hidden_individual').style.display = "none";
+
+
+            }else if(select.value == 'singlePupil' || select.value == 'Single Pupil Tracking'){
+                document.getElementById('hidden_grade').style.display = "none";
+                document.getElementById('hidden_year').style.display = "none";
+                document.getElementById('hidden_reason').style.display = "none";
+                document.getElementById('hidden_individual').style.display = "block";
 
             }else {
                 document.getElementById('hidden_grade').style.display = "none";
                 document.getElementById('hidden_year').style.display = "none";
                 document.getElementById('hidden_reason').style.display = "none";
+                document.getElementById('hidden_individual').style.display = "none";
+
             }
         }
+    
+        $('.select2').select2();
     </script>
 
 </body>
-</html
+</html>

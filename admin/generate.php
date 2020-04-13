@@ -319,6 +319,7 @@ else if($getParam == 'yearAndGrade'){
     
         $pdf->Output();
     
+<<<<<<< HEAD
 }else if($getParam == 'endofyear'){
 
     /*Do the various Date Calculations*/
@@ -384,6 +385,12 @@ else if($getParam == 'yearAndGrade'){
     }
 
     $pdf->Output();
+=======
+}else if($getParam == 'singlePupil'){
+
+    //This is the main report of the system.
+    
+>>>>>>> Report
 
 }
 
