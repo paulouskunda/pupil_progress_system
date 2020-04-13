@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     $stmt->bind_result($id,$username, $hashed_password);
                     if($stmt->fetch()){
-                        if(password_verify($password, $hashed_password)){
+                        if($password == $hashed_password ){
                             // Password is correct, so start a new session
                             session_start();
                             
@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Bind result variables
                             $stmt->bind_result($id,$username, $hashed_password);
                             if($stmt->fetch()){
-                                if(password_verify($password ,$hashed_password)){
+                                if($password == $hashed_password){
                                     // Password is correct, so start a new session
                                     session_start();
                                     
