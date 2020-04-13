@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 750px; padding: 20px; margin-left: 20%; margin-top:10% }
+        .wrapper{  padding: 5px; margin-left: 40%; margin-top:2% }
     </style>
 </head>
 <body>
@@ -71,41 +71,42 @@ if(isset($_POST['submit'])){
        
         <form class="form-group" action="" method="POST">
 			<div class="col-sm-6">
-				<input type="text" name="firstName" placeholder="First-Name" class="form-control">
+                <label>FirstName</lable>
+				<input type="text" name="firstName" required placeholder="First-Name" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
-				<input type="text" name="lastName" placeholder="Last-Name" class="form-control">
+            <label>LastName</lable>
+
+				<input type="text" name="lastName" required placeholder="Last-Name" class="form-control">
 
 			</div> 
-			<br><br><br>
 			<div class="col-sm-6">
+            <label>OtherName</lable>
+
 				<input type="text" name="otherName" placeholder="Other-Name [Middle Name]" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
+            <label>Phone Number</lable>
+
 				<input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control">
 
 			</div>
-			<br><br><br>
-			<!-- <div class="col-sm-6">
-				<input type="text" name="nrc" placeholder="Nrc Number" class="form-control">
-
-			</div> -->
+			
+		
 			<div class="col-sm-6">
+            <label>Address</lable>
+
 				<input type="text" name="address" placeholder="Address" class="form-control">
 
 			</div>
-			<br><br><br>
-			<!-- <div class="col-sm-6">
-				<input type="text" name="email" placeholder="Email Address" class="form-control">
-
-			</div> -->
+		
 			
 			<div class="col-sm-12">	
 				
 			</div>
-			<br><br>
+			<br>
 			<div class="col-sm-12">
 							<input type="submit" name="submit" value="Add Teacher" class="form-control btn btn-primary" style="width: 20%;">
 

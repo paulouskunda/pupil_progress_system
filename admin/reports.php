@@ -86,10 +86,42 @@ require_once '../includes/navbar_header.php';
                     <div class="col-sm-12" id="hidden_year" style="display: none;">
                         <label>Year Between</label><br>
                         <label class="control-label mb-1">From </label>
-                        <input type="text" name="startYear" id="date" class="form-control" required="true">
+                        <select class="form-control" name="startYear" >
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            
+                                
+                        </select>  
                         <label class="control-label mb-1">To</label>
-                        <input type="text" name="endYear" class="form-control" required>
+   
+                         <select class="form-control" name="startYear" >
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            
+                                
+                        </select>
                     </div>
+                        <br>
+
+                        <div class="col-sm-12" id="hidden_reason" style="display: none;">
+                        <label>Reason Type </label>
+                        <select class="form-control" name="reasonType" >
+                            <option value="active">Active</option>
+                            <option value="suspended">Suspended</option>
+                            <option value="notProgress">No Progress</option>
+                            <option value="transfer">Transfer</option>                               
+                        </select>
+                    </div>    
 
                         <input type="submit" value="submit"/>
                     </form>
