@@ -99,7 +99,7 @@ require_once '../includes/navbar_header.php';
                         </select>  
                         <label class="control-label mb-1">To</label>
    
-                         <select class="form-control" name="startYear" >
+                         <select class="form-control" name="endYear" >
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
