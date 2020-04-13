@@ -97,21 +97,15 @@ if(isset($_POST['submit'])){
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 750px; padding: 20px; margin-left: 20%; margin-top:10% }
+        .wrapper{ padding: 10px; margin-left: 20%; margin-top:10% }
     </style>
 </head>
 <body>
-<<<<<<< HEAD
 <?php
-// require_once '../includes/navbar_header.php';
+require_once '../includes/navbar_header.php';
 
 ?>
-=======
-		<?php 
-        	require_once '../includes/navbar_header.php';
-        ?>
 
->>>>>>> caa90e4c6563a7e89f68a591fa1641d7aa68cc84
     <div class="container">
     <div class="wrapper">
 
@@ -128,8 +122,9 @@ if(isset($_POST['submit'])){
        
         <form class="form-group" action="" method="POST">
             <h3> Parents/Guardians Section </h3>
-
-			<div class="col-sm-6">
+            <div class="col-sm-12">
+            <div class="col-sm-6">
+			
 				<label>First Name</label>
 				<input type="text" name="firstName" placeholder="First-Name" class="form-control">
 
@@ -139,6 +134,8 @@ if(isset($_POST['submit'])){
 				<input type="text" name="lastName" placeholder="Last-Name" class="form-control">
 
 			</div> 
+            </div>
+			
 			<br><br><br>
 			<div class="col-sm-6">
 				<label>Other Name</label>
