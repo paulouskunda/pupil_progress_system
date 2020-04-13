@@ -97,21 +97,15 @@ if(isset($_POST['submit'])){
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 750px; padding: 20px; margin-left: 20%; margin-top:10% }
+        .wrapper{ padding: 5px; margin-left: 30%; margin-top:2% }
     </style>
 </head>
 <body>
-<<<<<<< HEAD
 <?php
-// require_once '../includes/navbar_header.php';
+require_once '../includes/navbar_header.php';
 
 ?>
-=======
-		<?php 
-        	require_once '../includes/navbar_header.php';
-        ?>
 
->>>>>>> caa90e4c6563a7e89f68a591fa1641d7aa68cc84
     <div class="container">
     <div class="wrapper">
 
@@ -128,18 +122,20 @@ if(isset($_POST['submit'])){
        
         <form class="form-group" action="" method="POST">
             <h3> Parents/Guardians Section </h3>
-
-			<div class="col-sm-6">
+   
+            <div class="col-sm-6">
+			
 				<label>First Name</label>
-				<input type="text" name="firstName" placeholder="First-Name" class="form-control">
+				<input type="text" name="firstName" required placeholder="First-Name" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
 				<label>Last Name</label>
-				<input type="text" name="lastName" placeholder="Last-Name" class="form-control">
+				<input type="text" name="lastName" required placeholder="Last-Name" class="form-control">
 
 			</div> 
-			<br><br><br>
+           
+		
 			<div class="col-sm-6">
 				<label>Other Name</label>
 				<input type="text" name="otherName" placeholder="Other-Name [Middle Name]" class="form-control">
@@ -147,32 +143,27 @@ if(isset($_POST['submit'])){
 			</div>
 			<div class="col-sm-6">
 				<label>Phone Number</label>
-				<input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control">
+				<input type="text" name="phoneNumber" required placeholder="Phone Number" class="form-control">
 
 			</div>
-			<br><br><br>
-			<!-- <div class="col-sm-6">
-				<input type="text" name="nrc" placeholder="Nrc Number" class="form-control">
-
-			</div> -->
+		
 			<div class="col-sm-6">
 				<label>Physical Address</label>
 				<input type="text" name="address" placeholder="Address" class="form-control">
 
 			</div>
-			<br><br><br><br>
+            <hr>
             <h3 align="left">Pupils Sections</h3>
             <div class="col-sm-6">
             	<label>First Name</label>
-				<input type="text" name="firstPName" placeholder="First-Name" class="form-control">
+				<input type="text" name="firstPName" required placeholder="First-Name" class="form-control">
 
 			</div>
 			<div class="col-sm-6">
 				<label>Last Name</label>
-				<input type="text" name="lastPName" placeholder="Last-Name" class="form-control">
+				<input type="text" name="lastPName" required placeholder="Last-Name" class="form-control">
 
 			</div> 
-			<br><br><br>
 			<div class="col-sm-6">
 				<label>Other Name</label>
 
@@ -181,9 +172,9 @@ if(isset($_POST['submit'])){
 			</div>
 			<div class="col-sm-6">
 				<label>Date of Birth</label>
-				<input type="date" name="dob" placeholder="Date of birth" class="form-control">
+				<input type="date" name="dob" required placeholder="Date of birth" class="form-control">
 
-			</div>	<br><br><br>
+			</div>	
              <div class="col-sm-6">
 				<label>Select Grade</label>
 
@@ -198,31 +189,16 @@ if(isset($_POST['submit'])){
                 </select>
 			</div>
 		
-			<!-- <div class="col-sm-6">
-				<input type="text" name="nrc" placeholder="Nrc Number" class="form-control">
-
-			</div> -->
+	
 			<div class="col-sm-6">
 				<label>Year enrolled</label>
-				<input type="date" name="year" placeholder="Year enrolled" class="form-control">
+				<input type="date" required name="year" placeholder="Year enrolled" class="form-control">
 
 			</div>
-			<br><br><br>
-			<!-- <div class="col-sm-6">
-				<input type="text" name="email" placeholder="Email Address" class="form-control">
-
-			</div> -->
 			
-			<div class="col-sm-12">	
-				
-			</div>
-
-			<div class="col-sm-12">	
-				
-			</div>
-			<br><br>
+            <br>
 			<div class="col-sm-12">
-							<input type="submit" name="submit" value="Add Teacher" class="form-control btn btn-primary" style="width: 20%;">
+				<input type="submit" name="submit" value="Add Pupil" class="form-control btn btn-primary" style="width: 20%;">
 
 			</div>
 

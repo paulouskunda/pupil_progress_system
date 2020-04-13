@@ -8,7 +8,7 @@
 $getParam = $_POST['reportType'];
 
 //import the pdf
-require '../pdfGen/fpdf.php';
+require './pdfGen/fpdf.php';
 $pdf = new FPDF('P','mm','A3');
 
 //add new page
@@ -127,11 +127,12 @@ if($getParam == 'allPupils'){
 
 } else if($getParam == 'complex'){
     
-    $grade = $_POST['grade'];
+    $reason = $_POST['reasonType'];
         // $pdf->
+        
         $pdf->Ln();
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell(270,5,'All ACTIVE PUPILS IN GRADE '.$grade.' REPORT ',0,0,'R');
+        $pdf->Cell(270,5,'All '.strtoupper($reason).' PUPILS REPORT ',0,0,'R');
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
@@ -140,41 +141,55 @@ if($getParam == 'allPupils'){
         $pdf->Cell(290,5,'De Progress Primary ',0,0,'C');
         $pdf->Ln();
         $pdf->Ln();
-        $pdf->Cell(290,5,'All ACTIVE PUPILS IN GRADE '.$grade.' REPORT ',0,0,'C');
+        $pdf->Cell(290,5,'All '.strtoupper($reason).' PUPILS REPORT ',0,0,'C');
         
         $pdf->Ln();
         $pdf->Ln();
         //Query the results
     
-        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.grade = '$grade' AND puil.activeStatus = 'active' " ;
-        $results = mysqli_query($mysqli, $SQL);
-    
-        $pdf->SetFont('Arial','B',12);
-    
-        $pdf->Cell(60 ,5,'Full Name',1,0);
-        $pdf->Cell(40 ,5,'Date of Birth',1,0);
-        $pdf->Cell(50 ,5,'Parent Name',1,0);
-        $pdf->Cell(60,5,'Address',1,0);
-        $pdf->Cell(30,5,'Grade',1,0);
-        $pdf->Cell(34,5,'Year Enrolled',1,1);//end of line
-    
-        $pdf->Cell(274, 5, '',1,1);
-    
-    
-        if(mysqli_num_rows($results) > 0){
-    
-            while($getAllPupils = mysqli_fetch_assoc($results)){
-    
-                $pdf->Cell(60, 5, ''.$getAllPupils['pupilName'],1,0);
-                $pdf->Cell(40, 5, ''.$getAllPupils['dateOfBirth'],1,0);
-                $pdf->Cell(50, 5, ''.$getAllPupils['parentName'],1,0);
-                $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
-                $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
-                $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
-                
-    
+        if($reason == 'active'){
+
+            $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.activeStatus = 'active' " ;
+            $results = mysqli_query($mysqli, $SQL);
+        
+            $pdf->SetFont('Arial','B',12);
+        
+            $pdf->Cell(60 ,5,'Full Name',1,0);
+            $pdf->Cell(40 ,5,'Date of Birth',1,0);
+            $pdf->Cell(50 ,5,'Parent Name',1,0);
+            $pdf->Cell(60,5,'Address',1,0);
+            $pdf->Cell(30,5,'Grade',1,0);
+            $pdf->Cell(34,5,'Year Enrolled',1,1);//end of line
+        
+            $pdf->Cell(274, 5, '',1,1);
+        
+        
+            if(mysqli_num_rows($results) > 0){
+        
+                while($getAllPupils = mysqli_fetch_assoc($results)){
+        
+                    $pdf->Cell(60, 5, ''.$getAllPupils['pupilName'],1,0);
+                    $pdf->Cell(40, 5, ''.$getAllPupils['dateOfBirth'],1,0);
+                    $pdf->Cell(50, 5, ''.$getAllPupils['parentName'],1,0);
+                    $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
+                    $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
+                    $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
+                    
+        
+                }
             }
+
+
+        } else if($reason == 'suspended'){
+
+        } else if ($reason == 'notProgress'){
+
+        } else if ($reason == 'transfer'){
+
         }
+
+
+        
     
         $pdf->Output();
     
