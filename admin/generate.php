@@ -8,7 +8,7 @@
 $getParam = $_POST['reportType'];
 
 //import the pdf
-require './pdfGen/fpdf.php';
+require '../pdfGen/fpdf.php';
 $pdf = new FPDF('P','mm','A3');
 
 //add new page
@@ -125,13 +125,13 @@ if($getParam == 'allPupils'){
         $pdf->Output();
     
 
-} else if($getParam == ''){
+} else if($getParam == 'complex'){
     
     $grade = $_POST['grade'];
         // $pdf->
         $pdf->Ln();
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell(270,5,'All PUPILS IN GRADE '.$grade.' REPORT ',0,0,'R');
+        $pdf->Cell(270,5,'All ACTIVE PUPILS IN GRADE '.$grade.' REPORT ',0,0,'R');
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
@@ -140,13 +140,13 @@ if($getParam == 'allPupils'){
         $pdf->Cell(290,5,'De Progress Primary ',0,0,'C');
         $pdf->Ln();
         $pdf->Ln();
-        $pdf->Cell(290,5,'All PUPILS IN GRADE '.$grade.' REPORT ',0,0,'C');
+        $pdf->Cell(290,5,'All ACTIVE PUPILS IN GRADE '.$grade.' REPORT ',0,0,'C');
         
         $pdf->Ln();
         $pdf->Ln();
         //Query the results
     
-        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.grade = '$grade'";
+        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.grade = '$grade' AND puil.activeStatus = 'active' " ;
         $results = mysqli_query($mysqli, $SQL);
     
         $pdf->SetFont('Arial','B',12);
