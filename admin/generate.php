@@ -39,7 +39,9 @@ if($getParam == 'allPupils'){
     $pdf->Ln();
     //Query the results
 
-    $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID";
+    $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID 
+                ORDER BY pupil.yearStarted ASC";
+
     $results = mysqli_query($mysqli, $SQL);
 
     $pdf->SetFont('Arial','B',12);
@@ -92,7 +94,9 @@ if($getParam == 'allPupils'){
         $pdf->Ln();
         //Query the results
     
-        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.grade = '$grade'";
+        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.grade = '$grade' 
+                    ORDER BY pupil.pupilName ASC";
+
         $results = mysqli_query($mysqli, $SQL);
     
         $pdf->SetFont('Arial','B',12);
@@ -149,7 +153,8 @@ if($getParam == 'allPupils'){
     
         if($reason == 'active'){
 
-            $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.activeStatus = 'active' " ;
+            $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.activeStatus = 'active' 
+                        ORDER BY yearStarted ASC " ;
             $results = mysqli_query($mysqli, $SQL);
         
             $pdf->SetFont('Arial','B',12);
@@ -182,7 +187,8 @@ if($getParam == 'allPupils'){
 
         } else if($reason == 'suspended'){
 
-            $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.activeStatus = '$reason' " ;
+            $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.activeStatus = '$reason' 
+                        ORDER BY yearStarted ASC " ;
             $results = mysqli_query($mysqli, $SQL);
         
             $pdf->SetFont('Arial','B',12);
