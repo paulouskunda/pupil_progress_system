@@ -64,7 +64,7 @@ if($getParam == 'allPupils'){
             $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
             $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
             $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
-            $pdf->Ln();
+            $pdf->Ln(); //print next row on a new line
 
         }
     }
@@ -117,7 +117,7 @@ if($getParam == 'allPupils'){
                 $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
                 $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
                 $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
-                $pdf->Ln();
+                $pdf->Ln(); //print next row on a new line
     
             }
         }
@@ -162,7 +162,7 @@ if($getParam == 'allPupils'){
             $pdf->Cell(34,5,'Year Enrolled',1,1);//end of line
         
             $pdf->Cell(274, 5, '',1,1);
-            $pdf->Ln();
+            // $pdf->Ln();
         
             if(mysqli_num_rows($results) > 0){
         
@@ -174,7 +174,7 @@ if($getParam == 'allPupils'){
                     $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
                     $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
                     $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
-                    $pdf->Ln();
+                    $pdf->Ln(); //print next row on a new line
         
                 }
             }
@@ -207,7 +207,7 @@ if($getParam == 'allPupils'){
                     $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
                     $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
                     $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
-                    $pdf->Ln();
+                    $pdf->Ln(); //print next row on a new line
         
                 }
             }
