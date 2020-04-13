@@ -207,7 +207,7 @@ if($getParam == 'allPupils'){
                     $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
                     $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
                     $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
-                    
+                    $pdf->Ln();
         
                 }
             }
