@@ -25,6 +25,60 @@
 
     }
 
+    if(isset($_POST['submit'])){
+
+        $reasonTitle = $_POST['activeStatus'];
+        $reasonDetails = $_POST['reasonDetails'];
+        $pupilID = $_POST['pupilID'];
+        $grade = $_POST['grade'];
+
+        if($reasonTitle == 'active'){
+            $reasonTitle = $_POST['reason'];
+
+
+        }
+        //else if it is any of the other options
+        else {
+
+            if(updateAndInsert($reasonTitle, $reasonDetails, $pupilID, $mysqli, $grade)){
+                $_SESSION['reasonAdded'] =  "Recorded successfully added";
+            }else {
+                $_SESSION['reasonAddedFailed'] =  "Recorded successfully added";
+            }
+        }
+
+        
+        
+    }
+
+    function updateAndInsert($reasonTitle, $reasonDetails, $pupilID, $mysqli, $grade){
+        //Insert into reason and tracking table
+
+        $SQLINSERT = "INSERT INTO reasons(`pupilID`, `reason`, `reasonDetails`) VALUES(?, ?, ?)";
+        if($stmt = $mysqli->prepare($SQLINSERT)){
+            $stmt->bind_param('iss', $pupilID, $reasonTitle, $reasonDetails);
+
+            if($stmt->execute()){
+                $timestamp = date("Y-m-d H:i:s"); 
+                    // Record track for the given year
+                // Replace $timestamp with a single year in production
+                $recordTracker = "INSERT INTO tracking(pupilID, grade, dateModified) VALUES ('$pupilID', '$grade', '$timestamp') ";
+                if (mysqli_query($mysqli, $recordTracker)){
+                    
+                    $update = "UPDATE pupil SET grade = '$grade', activeStatus='$reasonTitle', dateModified = '$timestamp' WHERE pupilID = '$pupilID'";
+                    if(mysqli_query($mysqli, $update))
+                        return true;
+                    else
+                        return false;
+                }else 
+                    return false;            
+            }
+            else 
+                return false;
+        }
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -46,12 +100,22 @@
     <div class="wrapper">
         <h2>Change Active Status</h2>
 
-
+        <?php
+            if(isset($_SESSION['reasonAdded'])){
+                echo '<p class="alert alert-success"> '.$_SESSION['reasonAdded'].'</p>';
+                unset($_SESSION['reasonAdded']);
+            } else if(isset($_SESSION['reasonAddedFailed'])){
+                echo '<p class="alert alert-warning"> '.$_SESSION['reasonAddedFailed'].'</p>';
+                unset($_SESSION['reasonAddedFailed']);
+            }
+        ?>
        
         <form class="form-group" action="" method="POST">
             <h4> Active Status Modifications </h4>
 
 			<div class="col-sm-6">
+            <input text="text" name="pupilID" value="<?php echo  $pupilID; ?>" hidden />
+            <input text="text" name="grade" value="<?php echo  $grade; ?>" hidden />
                 <label>Pupil Name</label>
 				<input type="text" name="fullName" readonly value="<?php echo $pupilName; ?>" placeholder="Pupil" class="form-control">
 
@@ -83,14 +147,14 @@
                         <option id="select">
                             ~Select~
                         </option>
-                        <option id="active">Active</option>
-                        <option id="suspended">
+                        <option value="active">Active</option>
+                        <option value="suspended">
                             Suspended
                         </option>
-                        <option id="transfered">
+                        <option value="transfered">
                             Transfered
                         </option>
-                        <option id="dropout">
+                        <option value="dropout">
                             Drop Out
                         </option>
                 </select>	
@@ -103,7 +167,7 @@
             </div>
          
             <div class="col-sm-6">
-                <textarea placeholder="Reason  in details" class="form-control"></textarea>
+                <textarea name="reasonDetails" placeholder="Reason  in details" required class="form-control"></textarea>
             </div>
 
             <br>
