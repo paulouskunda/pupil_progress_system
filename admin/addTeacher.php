@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{  padding: 5px; margin-left: 40%; margin-top:2% }
+        .wrapper{  pabludding: 5px; margin-left: 40%; margin-top:2% }
     </style>
 </head>
 <body>
