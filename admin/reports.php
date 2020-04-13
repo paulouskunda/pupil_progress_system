@@ -65,6 +65,7 @@ require_once '../includes/navbar_header.php';
                                 <option id="inGrade" value="inGrade"> All Pupils in Grade </option>
                                 <option id="yearAndGrade" value="yearAndGrade"> All Pupils in </option>
                                 <option id="complex" value="complex"> All Pupils that are </option>
+                                <option id="endofyear" value="endofyear"> End of Year Report</option>
                                 
                             </select>
                         </div>

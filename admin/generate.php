@@ -288,6 +288,73 @@ else if($getParam == 'yearAndGrade'){
     
         $pdf->Output();
     
+}else if($getParam == 'endofyear'){
+
+    /*Do the various Date Calculations*/
+    $date=date_create("today");
+    $todayDateFormat = date_format($date,"Y-m-d");
+    //find out what the date was 3 days ago
+    $previuousDates = date_sub($date,date_interval_create_from_date_string("3 days")); 
+    $previuousDateFormat = date_format($previuousDates,"Y-m-d");
+    
+    // $pdf->
+    $pdf->Ln();
+    $pdf->SetFont('Arial','',10);
+    
+    $pdf->Cell(270,5,'All PUPILS WHO PROCEEDED TO NEXT GRADE REPORT',0,0,'R');
+    $pdf->Ln();
+    $pdf->Ln();
+    $pdf->Ln();
+    $pdf->Ln();
+    $pdf->SetFont('Arial','B',18);
+    $pdf->Cell(290,5,'De Progress Primary ',0,0,'C');
+    $pdf->Ln();
+    $pdf->Ln();
+    $pdf->Cell(290,5,'All PUPILS WHO PROCEEDED TO NEXT GRADE REPORT',0,0,'C');
+    
+    $pdf->Ln();
+    $pdf->Ln();
+    //Query the results
+
+    $SQL = "SELECT pupil.pupilName, pupil.grade as previous_grade,  
+    tracking.grade as current_grade, parent.parentName, pupil.yearStarted
+                FROM pupil, tracking, parent WHERE pupil.pupilID = tracking.pupilID 
+                    AND pupil.parentID = parent.parentID 
+                        AND YEAR(tracking.dateModified) BETWEEN '$todayDateFormat' AND '$previuousDateFormat'
+                            HAVING pupil.grade < tracking.grade";
+
+    $results = mysqli_query($mysqli, $SQL);
+
+    $pdf->SetFont('Arial','B',12);
+
+    $pdf->Cell(60 ,5,'Full Name',1,0);
+    $pdf->Cell(40 ,5,'Prevoius grade',1,0);
+    $pdf->Cell(50 ,5,'current grade',1,0);
+    $pdf->Cell(60,5,'Parent Name',1,0);
+    // $pdf->Cell(30,5,'Grade',1,0);
+    $pdf->Cell(34,5,'Year Enrolled',1,1);//end of line
+
+    $pdf->Cell(244, 5, '',1,1);
+
+
+    if(mysqli_num_rows($results) > 0){
+
+        while($getAllPupils = mysqli_fetch_assoc($results)){
+
+            $pdf->Cell(60, 5, ''.$getAllPupils['pupilName'],1,0);
+            $pdf->Cell(40, 5, ''.$getAllPupils['previous_grade'],1,0);
+            $pdf->Cell(50, 5, ''.$getAllPupils['current_grade'],1,0);
+            $pdf->Cell(60, 5, ''.$getAllPupils['parentName'],1,0);
+            // $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
+            $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
+            $pdf->Ln();
+
+        }
+    }
+
+    $pdf->Output();
+
 }
+
 
 ?>
