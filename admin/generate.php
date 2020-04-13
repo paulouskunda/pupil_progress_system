@@ -187,7 +187,8 @@ if($getParam == 'allPupils'){
 
         } else if($reason == 'suspended'){
 
-            $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.activeStatus = '$reason' 
+            $SQL = "SELECT * FROM pupil, parent, reasons WHERE pupil.parentID = parent.parentID AND 
+            pupil.pupilID = reasons.pupilID AND reasons.reason = '$reason' AND pupil.activeStatus = '$reason' 
                         ORDER BY yearStarted ASC " ;
             $results = mysqli_query($mysqli, $SQL);
         
@@ -221,7 +222,37 @@ if($getParam == 'allPupils'){
 
 
         } else if ($reason == 'notProgress'){
-
+            $SQL = "SELECT * FROM pupil, parent, reasons WHERE pupil.parentID = parent.parentID AND 
+            pupil.pupilID = reasons.pupilID AND reasons.reason = '$reason' AND pupil.activeStatus = '$reason' 
+                        ORDER BY yearStarted ASC " ;
+            $results = mysqli_query($mysqli, $SQL);
+        
+            $pdf->SetFont('Arial','B',12);
+        
+            $pdf->Cell(60 ,5,'Full Name',1,0);
+            $pdf->Cell(40 ,5,'Date of Birth',1,0);
+            $pdf->Cell(50 ,5,'Parent Name',1,0);
+            $pdf->Cell(60,5,'Address',1,0);
+            $pdf->Cell(30,5,'Grade',1,0);
+            $pdf->Cell(34,5,'Year Enrolled',1,1);//end of line
+        
+            $pdf->Cell(274, 5, '',1,1);
+        
+        
+            if(mysqli_num_rows($results) > 0){
+        
+                while($getAllPupils = mysqli_fetch_assoc($results)){
+        
+                    $pdf->Cell(60, 5, ''.$getAllPupils['pupilName'],1,0);
+                    $pdf->Cell(40, 5, ''.$getAllPupils['dateOfBirth'],1,0);
+                    $pdf->Cell(50, 5, ''.$getAllPupils['parentName'],1,0);
+                    $pdf->Cell(60, 5, ''.$getAllPupils['address'],1,0);
+                    $pdf->Cell(30, 5, ''.$getAllPupils['grade'],1,0);
+                    $pdf->Cell(34, 5, ''.$getAllPupils['yearStarted'],1,0);
+                    $pdf->Ln(); //print next row on a new line
+        
+                }
+            }
         } else if ($reason == 'transfer'){
 
         }
