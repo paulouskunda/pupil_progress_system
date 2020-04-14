@@ -386,7 +386,7 @@ else if($getParam == 'yearAndGrade'){
     $pdf->Output();
 }else if($getParam == 'singlePupil'){
 
-    //This is the main report of the system.
+    //This is the sub main report of the system.
     
 
 }
