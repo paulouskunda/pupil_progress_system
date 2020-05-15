@@ -72,7 +72,7 @@ require_once '../includes/navbar_header.php';
 
                                 <option id="endofyear" value="endofyear"> End of Year Report</option>
 
-                                <option id="singlePupil" value="singlePupil">Single Pupil Tracking</option>
+                                <!-- <option id="singlePupil" value="singlePupil">Single Pupil Tracking</option> -->
                                 
                             </select>
                         </div>
@@ -126,7 +126,7 @@ require_once '../includes/navbar_header.php';
                         <select class="form-control" name="reasonType" >
                             <option value="active">Active</option>
                             <option value="suspended">Suspended</option>
-                            <option value="notProgress">No Progress</option>
+                            <option value="No Progress">No Progress</option>
                             <option value="transfer">Transfer</option>                               
                         </select>
                     </div>  

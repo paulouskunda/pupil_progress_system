@@ -49,21 +49,19 @@ if(isset($_POST['submit'])){
 		$fullPName = $firstPName." ".$lastPName;
     }
 
+    $sqlSelect = "SELECT * FROM parent WHERE parentName = '$fullPName'";
+    $results = mysqli_query($mysqli, $sqlSelect);
+    if (mysqli_num_rows($results) > 0) {
+        # code...
+        $id = "";
+        while ($rows = mysqli_fetch_assoc($results)) {
+            # code...
+            $id = ['parentID'];
+        }
 
-
-    //SQL command
-    $sql = "INSERT INTO parent(`parentName`, `phoneNumber`, `address`, `dateCreated`) VALUES (?, ?, ?, ?)";
-
-    if($stmt = $mysqli->prepare($sql)){
-        $stmt->bind_param("ssss", $fullName, $phoneNumber, $address, $timestamp);
-
-        if($stmt->execute()){
-            $lastID = $stmt->insert_id;
-            //add the pupil details
-
-            $pupilSQL = "INSERT INTO pupil(`pupilName`, `parentID`, `dateOfBirth`, `grade`, `yearstarted`) VALUES (?, ?, ?, ?, ?)";
+        $pupilSQL = "INSERT INTO pupil(`pupilName`, `parentID`, `dateOfBirth`, `grade`, `yearstarted`) VALUES (?, ?, ?, ?, ?)";
             if($stmts = $mysqli->prepare($pupilSQL) ){
-                $stmts->bind_param("sisis", $fullPName, $lastID, $dob, $grade, $yearEnrolled);
+                $stmts->bind_param("sisis", $fullPName, $id, $dob, $grade, $yearEnrolled);
 
                 if($stmts->execute()){
                     $_SESSION['message'] = "Pupil ".$fullPName." was successfully enrolled";
@@ -75,13 +73,41 @@ if(isset($_POST['submit'])){
                 echo "Error ". $stmt->error;
             }
 
+    }else {
 
-        }else {
+        //SQL command
+        $sql = "INSERT INTO parent(`parentName`, `phoneNumber`, `address`, `dateCreated`) VALUES (?, ?, ?, ?)";
+
+        if($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param("ssss", $fullName, $phoneNumber, $address, $timestamp);
+
+            if($stmt->execute()){
+                $lastID = $stmt->insert_id;
+                //add the pupil details
+
+                $pupilSQL = "INSERT INTO pupil(`pupilName`, `parentID`, `dateOfBirth`, `grade`, `yearstarted`) VALUES (?, ?, ?, ?, ?)";
+                if($stmts = $mysqli->prepare($pupilSQL) ){
+                    $stmts->bind_param("sisis", $fullPName, $lastID, $dob, $grade, $yearEnrolled);
+
+                    if($stmts->execute()){
+                        $_SESSION['message'] = "Pupil ".$fullPName." was successfully enrolled";
+
+                    } else {
+                        echo "Error ". $stmt->error;
+                    }
+                }else {
+                    echo "Error ". $stmt->error;
+                }
+
+
+            }else {
+                echo "Error ". $stmt->error;
+            }
+        } else {
             echo "Error ". $stmt->error;
         }
-    } else {
-        echo "Error ". $stmt->error;
     }
+
 
 
 

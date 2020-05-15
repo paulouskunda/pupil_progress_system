@@ -221,7 +221,7 @@ if($getParam == 'allPupils'){
 
 
 
-        } else if ($reason == 'notProgress'){
+        } else if ($reason == 'No Progress'){
             $SQL = "SELECT * FROM pupil, parent, reasons WHERE pupil.parentID = parent.parentID AND 
             pupil.pupilID = reasons.pupilID AND reasons.reason = '$reason' AND pupil.activeStatus = '$reason' 
                         ORDER BY yearStarted ASC " ;
@@ -268,10 +268,11 @@ else if($getParam == 'yearAndGrade'){
     
     $startYear = $_POST['startYear'];
     $endYear =$_POST['endYear'];
+    $grade = $_POST['grade'];
         // $pdf->
         $pdf->Ln();
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell(270,5,'All PUPILS ENROLLED BEWTEEN '.$startYear.' -'.$endYear.' REPORT ',0,0,'R');
+        $pdf->Cell(270,5,'All PUPILS  IN '.$grade.'  BEWTEEN '.$startYear.' -'.$endYear.' REPORT ',0,0,'R');
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
@@ -280,13 +281,13 @@ else if($getParam == 'yearAndGrade'){
         $pdf->Cell(290,5,'De Progress Primary ',0,0,'C');
         $pdf->Ln();
         $pdf->Ln();
-        $pdf->Cell(290,5,'All PUPILS ENROLLED BEWTEEN '.$startYear.' -'.$endYear.' REPORT ',0,0,'C');
+        $pdf->Cell(290,5,'All PUPILS IN '.$grade.' BEWTEEN '.$startYear.' -'.$endYear.' REPORT ',0,0,'C');
         
         $pdf->Ln();
         $pdf->Ln();
         //Query the results
     
-        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID 
+        $SQL = "SELECT * FROM pupil, parent WHERE pupil.parentID = parent.parentID AND pupil.grade = '$grade'
                     AND YEAR(yearStarted)BETWEEN '$startYear'  AND '$endYear' ORDER BY yearStarted ASC ";
         $results = mysqli_query($mysqli, $SQL);
     
