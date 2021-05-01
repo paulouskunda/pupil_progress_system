@@ -29,7 +29,7 @@
 <div class="row" >
 <!-- Start of Card Deck Layout -->
 <div class="card-deck " >
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 50rem;">
 <img class="card-img-top" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="Card image cap"> 
 <div class="card-body">
 <h4 class="card-title">Reports</h4>

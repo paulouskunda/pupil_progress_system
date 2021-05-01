@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
         $sql = "SELECT adminID, adminUserName, password FROM admin WHERE adminUserName = ?";
-        $sql2 = "SELECT teacherID, teacherName, password FROM teacher WHERE teacherName = ?";
+        $sql2 = "SELECT teacherID, phoneNumber, grade_class, password FROM teacher WHERE phoneNumber = ?";
         
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -70,6 +70,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     }
                 }
+                // else if($results = $mysqli->query($sql2)){
+                //     if($results->num_rows > 0){
+                //         while($rows = $results->fetch_assoc()){
+                //             if($password == $rows['password']){
+                //                 $_SESSION["loggedin"] = true;
+                //                 $_SESSION["teacherid"] = $id;
+                //                 $_SESSION["username"] = $username;  
+
+                //                 header("location: teacher/move.php?grade=".$rows['grade_class']);
+
+                //             }else{
+                //                 $password_err = "The password you entered was not valid.";
+                //             }
+                //         }
+                //     }else{
+                //         $username_err = "No account found with that username.";
+                //     }
+                // }
                 else if($stmt = $mysqli->prepare($sql2)){
                     // Bind variables to the prepared statement as parameters
                     $stmt->bind_param("s", $param_username);
@@ -85,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         // Check if username exists, if yes then verify password
                         if($stmt->num_rows == 1){                    
                             // Bind result variables
-                            $stmt->bind_result($id,$username, $hashed_password);
+                            $stmt->bind_result($id,$username, $grade_class ,$hashed_password);
                             if($stmt->fetch()){
                                 if($password == $hashed_password){
                                     // Password is correct, so start a new session
@@ -95,9 +113,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     $_SESSION["loggedin"] = true;
                                     $_SESSION["teacherid"] = $id;
                                     $_SESSION["username"] = $username;                            
-                                    
+                                    echo ";";
                                     // Redirect user to welcome page
-                                    header("location: teacher/view.php");
+                                    header("location: teacher/move.php?grade=".$grade_class);
                                 } else{
                                     // Display an error message if password is not valid
                                     $password_err = "The password you entered was not valid.";
